@@ -57,21 +57,18 @@ Migrate(app, db)
 #    print('recieved json', json)
 #    send(json, json=True, broadcast=True)
 
-@socketio.on('my event')
-def handle_my_custom_event(json):
-    print('recieved my event', json)
-    response = [item for item in json.items()]
-    emit(response, broadcast=True)
+#@socketio.on('my event')
+#def handle_my_custom_event(json):
+#    print('recieved my event', json)
+#    response = [item for item in json.items()]
+#    emit(response, broadcast=True)
 
 
-@socketio.on('connect')
-def fun():
-    socketio.emit('hey', ['do you seeeee me'])
+#@socketio.on('connect')
+#def fun():
+#    socketio.emit('hey', ['do you seeeee me'])
 
-fun()
-
-
-
+#fun()
 
 
 # Application Security

@@ -11,7 +11,7 @@ def seed_servers():
         server_name = fake.word()
         public = fake.pybool()
 
-        server = Server(user_id, server_name, public)
+        server = Server(user_id=user_id, server_name=server_name, public=public)
         db.session.add(server)
         db.session.commit()
 

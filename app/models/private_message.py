@@ -9,7 +9,7 @@ class PrivateMessage(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
     body = db.Column(db.String(1000), nullable=False)
-    image_url = db.Column(db.String(100), nullable=False)
+    image_url = db.Column(db.String(100), nullable=True)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
     recipient = db.relationship(

@@ -15,14 +15,13 @@ def seed_friends():
         tup = (user_id_1, user_id_2)
         bar_tup = (user_id_2, user_id_1)
 
-        if tup or bar_tup in tracker:
+        if tup in tracker or bar_tup in tracker:
             continue
 
         tracker.add(tup)
         user_1 = User.query.get(user_id_1)
         user_2 = User.query.get(user_id_2)
         user_1.friends.append(user_2)
-        user_2.friends.append(user_1)
         db.session.commit()
 
 
