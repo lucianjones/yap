@@ -1,9 +1,10 @@
 import os
-from flask import Flask, render_template, request, session, redirect
+from flask import Flask, request, session, redirect, jsonify
 from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
+from flask_socketio import SocketIO, send, emit
 
 from .models import db, User
 from .api.user_routes import user_routes
@@ -18,6 +19,11 @@ from .seeds import seed_commands
 from .config import Config
 
 app = Flask(__name__)
+app.config.from_object(Config)
+socketio = SocketIO(app)
+
+socketio.run(app)
+
 
 # Setup login manager
 login = LoginManager(app)
@@ -32,7 +38,6 @@ def load_user(id):
 # Tell flask about our seed commands
 app.cli.add_command(seed_commands)
 
-app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix="/api/users")
 app.register_blueprint(auth_routes, url_prefix="/api/auth")
 app.register_blueprint(server_routes, url_prefix="/api/servers")
@@ -41,6 +46,32 @@ app.register_blueprint(message_routes, url_prefix="/api/messages")
 app.register_blueprint(private_message_routes, url_prefix="/api/private-messages")
 db.init_app(app)
 Migrate(app, db)
+
+#@socketio.on('message')
+#def handle_message(message):
+#    print('recieved message', message)
+#    send(message, broadcat=True)
+
+#@socketio.on('json')
+#def handle_json(json):
+#    print('recieved json', json)
+#    send(json, json=True, broadcast=True)
+
+@socketio.on('my event')
+def handle_my_custom_event(json):
+    print('recieved my event', json)
+    response = [item for item in json.items()]
+    emit(response, broadcast=True)
+
+
+@socketio.on('connect')
+def fun():
+    socketio.emit('hey', ['do you seeeee me'])
+
+fun()
+
+
+
 
 
 # Application Security
