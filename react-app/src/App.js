@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch} from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
 import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
-// import { authenticate } from "./services/auth";
+import Home from "./components/Home";
+
 import { authenticate } from "./store/session";
 
 function App() {
-  // const [authenticated, setAuthenticated] = useState(false);
   const dispatch = useDispatch()
   const [loaded, setLoaded] = useState(false);
 
@@ -43,7 +44,7 @@ function App() {
           <User />
         </ProtectedRoute>
         <ProtectedRoute path="/" exact={true}>
-          <h1>My Home Page</h1>
+          <Home />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

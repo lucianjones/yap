@@ -8,6 +8,12 @@ friends_table = db.Table(
     db.Column("user_id_2", db.Integer, db.ForeignKey("users.id")),
 )
 
+server_members = db.Table(
+    'server_members',
+    db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
+    db.Column('server_id', db.Integer, db.ForeignKey('servers.id')),
+)
+
 
 class User(db.Model, UserMixin):
     __tablename__ = "users"
@@ -19,7 +25,7 @@ class User(db.Model, UserMixin):
     pic_url = db.Column(db.String(255), nullable=True)
     first_name = db.Column(db.String(50), nullable=True)
     last_name = db.Column(db.String(50), nullable=True)
-    servers = db.relationship(
+    owned_servers = db.relationship(
         "Server", backref="users", cascade="all, delete", passive_deletes=True
     )
     channels = db.relationship(
@@ -38,6 +44,11 @@ class User(db.Model, UserMixin):
         secondaryjoin=id == friends_table.c.user_id_2,
         backref=db.backref("friends_table", lazy="joined"),
         lazy="joined",
+    )
+    joined_servers = db.relationship(
+        'Server',
+        secondary=server_members,
+        backref=db.backref('user_member', lazy='joined')
     )
 
     @property
@@ -59,11 +70,12 @@ class User(db.Model, UserMixin):
             "pic_url": self.pic_url,
             "first_name": self.first_name,
             "last_name": self.last_name,
-            "servers": [server.to_dict() for server in self.servers],
+            "owned_servers": [server.to_dict() for server in self.owned_servers],
             "channels": [channel.to_dict() for channel in self.channels],
             "messages": [message.to_dict() for message in self.messages],
-            "friends": [friend for friend in self.friend],
+            "friends": [friend.id for friend in self.friends],
+            "joined_servers": [server.id for server in self.joined_servers],
             "private_message": [
-                private_message.to_dict() for private_message in private_message
+               private_message.to_dict() for private_message in self.private_messages
             ],
         }
