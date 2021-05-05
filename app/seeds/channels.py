@@ -4,10 +4,11 @@ from random import randint
 
 fake = Faker()
 
+
 def seed_channels():
     server_pairs = [(server.user_id, server.id) for server in Server.query.all()]
     for i in range(125):
-        server_pair = server_pairs[randint(0,24)]
+        server_pair = server_pairs[randint(0, 24)]
         user_id = server_pair[0]
         server_id = server_pair[1]
         channel_name = fake.word()
@@ -19,5 +20,5 @@ def seed_channels():
 
 
 def undo_channels():
-    db.session.execute('TRUNCATE comments RESTART IDENTITY CASCADE;')
+    db.session.execute('TRUNCATE channels RESTART IDENTITY CASCADE;')
     db.session.commit()

@@ -1,6 +1,6 @@
 from app.models import db, User
-from app.models.user import friends_table
 from random import randint
+
 
 def seed_friends():
     tracker = set()
@@ -27,5 +27,5 @@ def seed_friends():
 
 def undo_friends():
     db.session.execute(
-        'TRUNCATE follower_to_followee RESTART IDENTITY CASCADE;')
+        'TRUNCATE friends_table RESTART IDENTITY CASCADE;')
     db.session.commit()

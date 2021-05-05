@@ -21,5 +21,5 @@ def seed_messages():
         db.session.commit()
 
 def undo_messages():
-    db.session.execute('TRUNCATE comments RESTART IDENTITY CASCADE;')
+    db.session.execute('TRUNCATE messages RESTART IDENTITY CASCADE;')
     db.session.commit()

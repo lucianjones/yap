@@ -15,14 +15,14 @@ from .api.message_routes import message_routes
 from .api.private_message_routes import private_message_routes
 
 from .seeds import seed_commands
-
 from .config import Config
 
 app = Flask(__name__)
-app.config.from_object(Config)
-socketio = SocketIO(app)
+socketio = SocketIO(app, cors_allowed_origins="*")
 
-socketio.run(app)
+
+if __name__ == "__init__":
+    socketio.run(app)
 
 
 # Setup login manager
@@ -38,41 +38,42 @@ def load_user(id):
 # Tell flask about our seed commands
 app.cli.add_command(seed_commands)
 
+app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix="/api/users")
 app.register_blueprint(auth_routes, url_prefix="/api/auth")
 app.register_blueprint(server_routes, url_prefix="/api/servers")
 app.register_blueprint(channel_routes, url_prefix="/api/channels")
 app.register_blueprint(message_routes, url_prefix="/api/messages")
 app.register_blueprint(private_message_routes, url_prefix="/api/private-messages")
+
 db.init_app(app)
 Migrate(app, db)
 
-#@socketio.on('message')
-#def handle_message(message):
+# @socketio.on('message')
+# def handle_message(message):
 #    print('recieved message', message)
 #    send(message, broadcat=True)
 
-#@socketio.on('json')
-#def handle_json(json):
+# @socketio.on('json')
+# def handle_json(json):
 #    print('recieved json', json)
 #    send(json, json=True, broadcast=True)
 
-#@socketio.on('my event')
-#def handle_my_custom_event(json):
+# @socketio.on('my event')
+# def handle_my_custom_event(json):
 #    print('recieved my event', json)
 #    response = [item for item in json.items()]
 #    emit(response, broadcast=True)
 
 
-#@socketio.on('connect')
-#def fun():
+# @socketio.on('connect')
+# def fun():
 #    socketio.emit('hey', ['do you seeeee me'])
 
-#fun()
+# fun()
 
 
-# Application Security
-CORS(app)
+CORS(app, supports_credentials=True)
 
 # Since we are deploying with Docker and Flask,
 # we won't be using a buildpack when we deploy to Heroku.

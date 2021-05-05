@@ -6,6 +6,7 @@ from .messages import seed_messages, undo_messages
 from .friends import seed_friends, undo_friends
 from .private_messages import seed_private_messages, undo_private_messages
 from .recipients import seed_recipients, undo_recipients
+from .servers_join import seed_server_members, undo_server_members
 
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
@@ -22,6 +23,7 @@ def seed():
     seed_friends()
     seed_private_messages()
     seed_recipients()
+    seed_server_members()
     # Add other seed functions here
 
 
@@ -35,4 +37,5 @@ def undo():
     undo_friends()
     undo_private_messages()
     undo_recipients()
+    undo_server_members()
     # Add other undo functions here

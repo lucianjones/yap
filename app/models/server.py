@@ -18,7 +18,7 @@ class Server(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "user_id": self.userId,
+            "user_id": self.user_id,
             "server_name": self.server_name,
             "public": self.public,
             "channels": [channel.to_dict() for channel in self.channels],

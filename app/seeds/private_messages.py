@@ -18,5 +18,5 @@ def seed_private_messages():
 
 
 def undo_private_messages():
-    db.session.execute('TRUNCATE comments RESTART IDENTITY CASCADE;')
+    db.session.execute('TRUNCATE private_messages RESTART IDENTITY CASCADE;')
     db.session.commit()
