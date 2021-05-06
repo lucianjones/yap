@@ -1,6 +1,7 @@
 // constants
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
+const GET_USER = "session/GET_USER";
 
 const setUser = (user) => ({
     type: SET_USER,
@@ -11,11 +12,29 @@ const removeUser = () => ({
     type: REMOVE_USER
 })
 
+const get_user = (user) => ({
+    type: GET_USER,
+    payload: user,
+});
+
+export const getUser = (id) => async (dispatch) => { 
+    const response = await fetch(`/api/users/${id}`, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+    });
+    const user = await response.json();
+    if (user.errors) {
+        return;
+    }
+    dispatch(get_user(user));
+};
 
 
 // thunks
 export const authenticate = () => async (dispatch) => {
-    const response = await fetch('/api/auth/', {
+    const response = await fetch('/api/auth', {
         headers: {
             'Content-Type': 'application/json'
         }
@@ -86,6 +105,8 @@ export default function reducer(state = initialState, action) {
             return { user: action.payload };
         case REMOVE_USER:
             return { user: null };
+        case GET_USER: 
+            return { user: action.payload };
         default:
             return state;
     }

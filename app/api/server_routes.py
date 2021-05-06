@@ -16,7 +16,7 @@ def get_servers():
 
 @server_routes.route("/<int:id>")
 @login_required
-def get_server(id):
+def get_joined_server(id):
     server = Server.query.get(id)
     return server.to_dict()
 

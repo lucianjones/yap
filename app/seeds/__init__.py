@@ -10,11 +10,11 @@ from .servers_join import seed_server_members, undo_server_members
 
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
-seed_commands = AppGroup('seed')
+seed_commands = AppGroup("seed")
 
 
 # Creates the `flask seed all` command
-@seed_commands.command('all')
+@seed_commands.command("all")
 def seed():
     seed_users()
     seed_servers()
@@ -28,7 +28,7 @@ def seed():
 
 
 # Creates the `flask seed undo` command
-@seed_commands.command('undo')
+@seed_commands.command("undo")
 def undo():
     undo_users()
     undo_servers()

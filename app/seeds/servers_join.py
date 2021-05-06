@@ -5,7 +5,7 @@ from random import randint
 def seed_server_members():
     tracker = set()
 
-    for i in range(100):
+    for i in range(1000):
         user_id = randint(1, 88)
         server_id = randint(1, 25)
 
@@ -22,6 +22,5 @@ def seed_server_members():
 
 
 def undo_server_members():
-    db.session.execute(
-        'TRUNCATE server_members RESTART IDENTITY CASCADE;')
+    db.session.execute("TRUNCATE server_members RESTART IDENTITY CASCADE;")
     db.session.commit()

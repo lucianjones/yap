@@ -26,6 +26,6 @@ class Message(db.Model):
             "channel_id": self.channel_id,
             "body": self.body,
             "image_url": self.image_url,
-            "created_at": self.created_at,
-            "updated_at": self.updated_at,
+            "created_at": self.created_at.isoformat(),
+            "updated_at": self.updated_at.isoformat(),
         }

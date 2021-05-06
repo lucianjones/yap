@@ -12,8 +12,8 @@ class PrivateMessage(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
     recipient = db.relationship(
-        "Recipient",
-        back_populates="private_message", uselist=False )
+        "Recipient", back_populates="private_message", uselist=False
+    )
 
     def to_dict(self):
         return {

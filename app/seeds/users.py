@@ -100,23 +100,24 @@ def seed_users():
         "kingsamosa",
     ]
 
-
-    demo = User(username='Demo', email='demo@aa.io',
-                password='password')
+    demo = User(username="Demo", email="demo@aa.io", password="password")
+    demo2 = User(username="Demo2", email="demo2@aa.io", password="password")
 
     db.session.add(demo)
+    db.session.add(demo2)
 
     db.session.commit()
 
     result = []
     for name in user_names:
         result.append(
-            User(username=name,
-                 email=fake.company_email(),
-                 hashed_password='password',
-                 first_name=fake.first_name(),
-                 last_name=fake.last_name()
-                )
+            User(
+                username=name,
+                email=fake.company_email(),
+                password="password",
+                first_name=fake.first_name(),
+                last_name=fake.last_name(),
+            )
         )
     for user in result:
         db.session.add(user)
@@ -128,5 +129,5 @@ def seed_users():
 # TRUNCATE Removes all the data from the table, and resets
 # the auto incrementing primary key
 def undo_users():
-    db.session.execute('TRUNCATE users RESTART IDENTITY CASCADE;')
+    db.session.execute("TRUNCATE users RESTART IDENTITY CASCADE;")
     db.session.commit()
