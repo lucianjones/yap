@@ -1,8 +1,17 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import db, Server, User
+from app.forms import ServerForm
 
 server_routes = Blueprint("servers", __name__)
+
+
+def validation_errors_to_error_messages(validation_errors):
+    errorMessages = []
+    for field in validation_errors:
+        for error in validation_errors[field]:
+            errorMessages.append(f"{field} : {error}")
+    return errorMessages
 
 
 @server_routes.route("/")
@@ -25,18 +34,19 @@ def get_joined_server(id):
 @login_required
 def post_server():
     user_id = current_user.get_id()
-    server_name = request.form["server_name"]
-    public = request.form["public"]
-    if public == "true":
-        public = True
-    else:
-        public = False
+    form = ServerForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+    if form.validate_on_submit():
+        server = Server(
+            user_id=user_id,
+            server_name=form.data["server_name"],
+            public=form.data["public"],
+        )
 
-    new_server = Server(user_id=user_id, server_name=server_name, public=public)
-
-    db.session.add(new_server)
-    db.session.commit()
-    return {201: "Post Successful"}
+        db.session.add(server)
+        db.session.commit()
+        return server.to_dict()
+    return {"errors": validation_errors_to_error_messages(form.errors)}, 401
 
 
 @server_routes.route("/<int:id>", methods=["PUT"])
