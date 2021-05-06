@@ -20,5 +20,5 @@ def seed_recipients():
 
 
 def undo_recipients():
-    db.session.execute('TRUNCATE recipients RESTART IDENTITY CASCADE;')
+    db.session.execute("TRUNCATE recipients RESTART IDENTITY CASCADE;")
     db.session.commit()

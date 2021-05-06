@@ -4,7 +4,12 @@ from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
+
 from flask_socketio import SocketIO, send, emit
+
+
+from .seeds import seed_commands
+from .config import Config
 
 from .models import db, User
 from .api.user_routes import user_routes
@@ -14,18 +19,9 @@ from .api.channel_routes import channel_routes
 from .api.message_routes import message_routes
 from .api.private_message_routes import private_message_routes
 
-from .seeds import seed_commands
-from .config import Config
 
 app = Flask(__name__)
-socketio = SocketIO(app, cors_allowed_origins="*")
-
-
-if __name__ == "__init__":
-    socketio.run(app)
-
-
-# Setup login manager
+## Setup login manager
 login = LoginManager(app)
 login.login_view = "auth.unauthorized"
 
@@ -35,10 +31,20 @@ def load_user(id):
     return User.query.get(int(id))
 
 
+socketio = SocketIO(app, cors_allowed_origins="*", logger=True)
+if __name__ == "__init__":
+    socketio.run(app)
+
 # Tell flask about our seed commands
 app.cli.add_command(seed_commands)
 
+# Import config
 app.config.from_object(Config)
+
+# Import sockets
+from .sockets.messages import message_update
+
+# Register routes
 app.register_blueprint(user_routes, url_prefix="/api/users")
 app.register_blueprint(auth_routes, url_prefix="/api/auth")
 app.register_blueprint(server_routes, url_prefix="/api/servers")
@@ -46,39 +52,19 @@ app.register_blueprint(channel_routes, url_prefix="/api/channels")
 app.register_blueprint(message_routes, url_prefix="/api/messages")
 app.register_blueprint(private_message_routes, url_prefix="/api/private-messages")
 
+# Initialize our databases
 db.init_app(app)
 Migrate(app, db)
 
-# @socketio.on('message')
-# def handle_message(message):
-#    print('recieved message', message)
-#    send(message, broadcat=True)
-
-# @socketio.on('json')
-# def handle_json(json):
-#    print('recieved json', json)
-#    send(json, json=True, broadcast=True)
-
-# @socketio.on('my event')
-# def handle_my_custom_event(json):
-#    print('recieved my event', json)
-#    response = [item for item in json.items()]
-#    emit(response, broadcast=True)
-
-
-# @socketio.on('connect')
-# def fun():
-#    socketio.emit('hey', ['do you seeeee me'])
-
-# fun()
-
-
+# Make sure cross-origin is enebled
 CORS(app, supports_credentials=True)
 
 # Since we are deploying with Docker and Flask,
 # we won't be using a buildpack when we deploy to Heroku.
 # Therefore, we need to make sure that in production any
 # request made over http is redirected to https.
+
+
 # Well.........
 
 
@@ -110,3 +96,14 @@ def react_root(path):
     if path == "favicon.ico":
         return app.send_static_file("favicon.ico")
     return app.send_static_file("index.html")
+
+
+@socketio.on("connect")
+def test_connect():
+    print("Client connected")
+    emit({"data": "Connected"}, include_self=True)
+
+
+@socketio.on("disconnect")
+def test_disconnect():
+    print("Client disconnected")

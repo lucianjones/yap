@@ -12,11 +12,13 @@ def seed_private_messages():
         updated_at = fake.date()
         user_id = randint(1, 88)
 
-        pm = PrivateMessage(body=body, created_at=created_at, updated_at=updated_at, user_id=user_id)
+        pm = PrivateMessage(
+            body=body, created_at=created_at, updated_at=updated_at, user_id=user_id
+        )
         db.session.add(pm)
         db.session.commit()
 
 
 def undo_private_messages():
-    db.session.execute('TRUNCATE private_messages RESTART IDENTITY CASCADE;')
+    db.session.execute("TRUNCATE private_messages RESTART IDENTITY CASCADE;")
     db.session.commit()

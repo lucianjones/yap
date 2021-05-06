@@ -9,9 +9,9 @@ friends_table = db.Table(
 )
 
 server_members = db.Table(
-    'server_members',
-    db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
-    db.Column('server_id', db.Integer, db.ForeignKey('servers.id')),
+    "server_members",
+    db.Column("user_id", db.Integer, db.ForeignKey("users.id")),
+    db.Column("server_id", db.Integer, db.ForeignKey("servers.id")),
 )
 
 
@@ -46,9 +46,9 @@ class User(db.Model, UserMixin):
         lazy="joined",
     )
     joined_servers = db.relationship(
-        'Server',
+        "Server",
         secondary=server_members,
-        backref=db.backref('user_member', lazy='joined')
+        backref=db.backref("user_member", lazy="joined"),
     )
 
     @property
@@ -74,8 +74,8 @@ class User(db.Model, UserMixin):
             "channels": [channel.to_dict() for channel in self.channels],
             "messages": [message.to_dict() for message in self.messages],
             "friends": [friend.id for friend in self.friends],
-            "joined_servers": [server.id for server in self.joined_servers],
+            "joined_servers": [server.to_dict() for server in self.joined_servers],
             "private_message": [
-               private_message.to_dict() for private_message in self.private_messages
+                private_message.to_dict() for private_message in self.private_messages
             ],
         }
