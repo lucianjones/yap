@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { postChannel } from '../../store/channel';
+import { postChannel } from '../../store/channels';
 
 function ChannelForm({server_id}) {
     const dispatch = useDispatch();

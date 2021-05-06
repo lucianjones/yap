@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Modal } from "../../context/Modal";
 import ChannelForm from "./ChannelFormModal.js";
 
-function ChannelFormModal() {
+function ChannelFormModal({ server_id }) {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -10,7 +10,7 @@ function ChannelFormModal() {
       <button onClick={() => setShowModal(true)}>Create Server</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <ChannelForm setShowModal={setShowModal} />
+          <ChannelForm server_id={server_id} setShowModal={setShowModal} />
         </Modal>
       )}
     </>
