@@ -8,7 +8,8 @@ class Channel(db.Model):
     server_id = db.Column(
         db.ForeignKey("servers.id", ondelete="CASCADE"), nullable=False
     )
-    user_id = db.Column(db.ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
+    user_id = db.Column(db.ForeignKey(
+        "users.id", ondelete="CASCADE"), nullable=False)
     channel_name = db.Column(db.String(50), nullable=False)
     public = db.Column(db.Boolean, nullable=False)
     messages = db.relationship(

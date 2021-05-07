@@ -6,7 +6,8 @@ fake = Faker()
 
 
 def seed_channels():
-    server_pairs = [(server.user_id, server.id) for server in Server.query.all()]
+    server_pairs = [(server.user_id, server.id)
+                    for server in Server.query.all()]
     for i in range(125):
         server_pair = server_pairs[randint(0, 24)]
         user_id = server_pair[0]

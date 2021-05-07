@@ -6,7 +6,8 @@ class Message(db.Model):
     __tablename__ = "messages"
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
+    user_id = db.Column(db.ForeignKey(
+        "users.id", ondelete="CASCADE"), nullable=False)
     server_id = db.Column(
         db.ForeignKey("servers.id", ondelete="CASCADE"), nullable=False
     )

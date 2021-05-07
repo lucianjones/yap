@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import LoginForm from "./components/auth/LoginForm";
@@ -12,12 +12,12 @@ import Home from "./components/Home";
 import { authenticate } from "./store/session";
 
 function App() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    (async() => {
-      await dispatch(authenticate())
+    (async () => {
+      await dispatch(authenticate());
       setLoaded(true);
     })();
   }, [dispatch]);
@@ -25,8 +25,6 @@ function App() {
   if (!loaded) {
     return null;
   }
- 
-
 
   return (
     <BrowserRouter>
@@ -38,7 +36,7 @@ function App() {
         <Route path="/sign-up" exact={true}>
           <SignUpForm />
         </Route>
-        <ProtectedRoute path="/users/:userId" exact={true} >
+        <ProtectedRoute path="/users/:userId" exact={true}>
           <User />
         </ProtectedRoute>
         <ProtectedRoute path="/" exact={true}>

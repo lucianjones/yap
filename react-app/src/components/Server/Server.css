@@ -1,17 +1,17 @@
 .server-button {
-    border: none;
-    border-radius: none;
-    background-color: grey;
-    color: white;
-    margin: 2px;
-    text-align: left;
-    height: 30px;
+  border: none;
+  border-radius: none;
+  background-color: grey;
+  color: white;
+  margin: 2px;
+  text-align: left;
+  height: 30px;
 }
 
 #channels {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    width: 150px;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 150px;
+  height: 100%;
 }

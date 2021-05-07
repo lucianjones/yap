@@ -1,43 +1,43 @@
 #main {
-    width: 80vw;
-    height: 100%;
-    margin: 0 20px;
-    display: flex;
-    flex-direction: column;
-
-}#messages {
-    width: 78vw;
-    height: 1000px;
-    margin: 0 20px;
-    display: flex;
-    flex-direction: column-reverse;
-    overflow: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+  width: 80vw;
+  height: 100%;
+  margin: 0 20px;
+  display: flex;
+  flex-direction: column;
+}
+#messages {
+  width: 78vw;
+  height: 1000px;
+  margin: 0 20px;
+  display: flex;
+  flex-direction: column-reverse;
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 #messages::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 .not-yours {
-    width: 55%;
-    margin-bottom: 40px;
-    border: 1px solid black;
-    padding: 5px 15px 10px;
-    align-self: flex-start;
+  width: 55%;
+  margin-bottom: 40px;
+  border: 1px solid black;
+  padding: 5px 15px 10px;
+  align-self: flex-start;
 }
 
 .yours {
-    width: 55vw;
-    margin-bottom: 40px;
-    border: 1px solid grey;
-    padding: 5px 15px 10px;
-    align-self: flex-end;
+  width: 55vw;
+  margin-bottom: 40px;
+  border: 1px solid grey;
+  padding: 5px 15px 10px;
+  align-self: flex-end;
 }
 
 .name-date {
-    display: flex;
-    justify-content: space-between;
-    align-content: center;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
 }
