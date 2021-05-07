@@ -1,4 +1,4 @@
-from .db import db
+from app.models import db, User
 from datetime import datetime
 
 
@@ -19,9 +19,11 @@ class Message(db.Model):
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
 
     def to_dict(self):
+        username = User.query.get(self.user_id).username
         return {
             "id": self.id,
             "user_id": self.user_id,
+            "username": username,
             "server_id": self.server_id,
             "channel_id": self.channel_id,
             "body": self.body,

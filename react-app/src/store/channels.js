@@ -6,16 +6,23 @@ const post_channel = (channel) => ({
 });
 
 export const postChannel = (server_id, channelName, isPublic) => async(dispatch) => {
+    console.log(server_id)
     const response = await fetch('/api/channels', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
-        crossDomain: true
+        crossDomain: true,
+        body: JSON.stringify({ 
+            "server_id": server_id,
+            "channel_name": channelName,
+            "public": isPublic
+        })
     });
 
     const channel = await response.json()
     if (channel.errors) return;
     dispatch(post_channel(channel));
+    return channel
 };
 
 export default function channels(state = {}, action) {

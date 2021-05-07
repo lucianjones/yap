@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { postChannel } from '../../store/channels';
 
-function ChannelForm({server_id}) {
+function ChannelForm({ server_id }) {
     const dispatch = useDispatch();
     const [errors, setErrors] = useState([]);
     const [channelName, setChannelName] = useState('');
@@ -25,9 +25,9 @@ function ChannelForm({server_id}) {
                     ))}
                 </div>
                 <div>
-                    <label htmlFor='serverName'>Server Name</label>
+                    <label htmlFor='channelName'>Channel Name</label>
                     <input
-                        name='serverName'
+                        name='channelName'
                         type='text'
                         value={channelName}
                         onChange={(e) => setChannelName(e.target.value)}

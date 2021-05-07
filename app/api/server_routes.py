@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import db, Server, User
-from app.forms import ServerForm
+from app.forms import ServerForm, LoginForm
 
 server_routes = Blueprint("servers", __name__)
 
@@ -14,7 +14,7 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 
-@server_routes.route("/")
+@server_routes.route("")
 @login_required
 def get_servers():
     user_id = current_user.get_id()
@@ -30,7 +30,7 @@ def get_joined_server(id):
     return server.to_dict()
 
 
-@server_routes.route("/", methods=["POST"])
+@server_routes.route("", methods=["POST"])
 @login_required
 def post_server():
     user_id = current_user.get_id()

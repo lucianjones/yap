@@ -47,11 +47,13 @@ export const postServer = (serverName, isPublic) => async(dispatch) => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
-        crossDomain: true
+        crossDomain: true,
+        body: JSON.stringify({ 'server_name': serverName, 'public': isPublic })
     });
     const server = await response.json();
     if (server.errors) return;
     dispatch(post_server(server));
+    return server
 };
 
 export default function servers(state = {}, action) {

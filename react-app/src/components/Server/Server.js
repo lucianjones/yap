@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-import Channel from './Channel';
-import { socket } from '../socket/socket'
-import ChannelFormModal from './ChannelFormModal'
+import Channel from '../Channel';
+import { socket } from '../../socket/socket'
+import ChannelFormModal from '../ChannelFormModal'
+import './Server.css'
 
-function Server({ server }) {
+function Server({ server, channel_id, server_id }) {
     const [channels, setChannels] = useState(false);
-    const [messages, setMessages] = useState(-1);
-    
 
     useEffect(() => {
         if (!channels) {
@@ -21,15 +20,14 @@ function Server({ server }) {
         }
     }, [channels, server.channels])
 
-
         return (
             <div id='channels'>
-                <button onClick={() => channels ? setChannels(false) : setChannels(true)}>
-                    { server?.server_name }
+                <button class='server-button' onClick={() => channels ? setChannels(false) : setChannels(true)}>
+                    { server.server_name }
                 </button>
-                { channels && <ChannelFormModal server_id={server?.id}/> }
+                { channels && <ChannelFormModal server_id={server.id}/> }
                 { channels && server.channels.map(channel => (
-                    <Channel key={ channel.id } serverId={ server?.id } channel={ channel } state={{ messages, setMessages }}/>
+                    <Channel key={ channel.id } sid={ server.id } channel={ channel } channel_id={ channel_id } server_id={ server_id }/>
                 ))}
             </div>
     );

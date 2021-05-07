@@ -2,6 +2,7 @@ import ast
 
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
+from sqlalchemy import desc
 from app.models import db, Message
 
 message_routes = Blueprint("messages", __name__)
@@ -10,7 +11,11 @@ message_routes = Blueprint("messages", __name__)
 @message_routes.route("/<int:cid>")
 @login_required
 def get_messages(cid):
-    results = Message.query.filter(Message.channel_id == cid).all()
+    results = (
+        Message.query.filter(Message.channel_id == cid)
+        .order_by(desc(Message.created_at))
+        .all()
+    )
     messages = [result.to_dict() for result in results]
 
     return {"messages": messages}
@@ -19,10 +24,8 @@ def get_messages(cid):
 @message_routes.route("", methods=["POST"])
 @login_required
 def post_message():
-    cur_user_id = int(current_user.get_id())
     dict_str = request.data.decode("UTF-8")
     data = ast.literal_eval(dict_str)["message"]
-    print("########", data)
 
     message = Message()
     message.user_id = data["user_id"]

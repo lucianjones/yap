@@ -15,7 +15,7 @@ const post_message = (messages) => ({
 });
 
 export const getMessages = (channel_id) => async(dispatch) => {
-    console.log('here')
+    if (channel_id === -1) return;
     const response = await fetch(`/api/messages/${channel_id}`, {
         header: { 'Content-Type': 'application/json' },
         credentials: 'include',

@@ -7,7 +7,7 @@ function ChannelFormModal({ server_id }) {
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Create Server</button>
+      <button onClick={() => setShowModal(true)}>Create Channel</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <ChannelForm server_id={server_id} setShowModal={setShowModal} />

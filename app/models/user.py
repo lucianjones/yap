@@ -13,6 +13,11 @@ server_members = db.Table(
     db.Column("user_id", db.Integer, db.ForeignKey("users.id")),
     db.Column("server_id", db.Integer, db.ForeignKey("servers.id")),
 )
+channel_members = db.Table(
+    "channel_members",
+    db.Column("user_id", db.Integer, db.ForeignKey("users.id")),
+    db.Column("channel_id", db.Integer, db.ForeignKey("channels.id")),
+)
 
 
 class User(db.Model, UserMixin):
@@ -50,6 +55,11 @@ class User(db.Model, UserMixin):
         secondary=server_members,
         backref=db.backref("user_member", lazy="joined"),
     )
+    joined_channels = db.relationship(
+        "Channel",
+        secondary=channel_members,
+        backref=db.backref("user_member", lazy="joined"),
+    )
 
     @property
     def password(self):
@@ -75,6 +85,7 @@ class User(db.Model, UserMixin):
             "messages": [message.to_dict() for message in self.messages],
             "friends": [friend.id for friend in self.friends],
             "joined_servers": [server.to_dict() for server in self.joined_servers],
+            "joined_channels": [channel.to_dict() for channel in self.joined_channels],
             "private_message": [
                 private_message.to_dict() for private_message in self.private_messages
             ],

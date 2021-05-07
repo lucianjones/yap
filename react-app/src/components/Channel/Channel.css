@@ -1,0 +1,15 @@
+.channel-button {
+    border: none;
+    border-radius: none;
+    background-color: lightgrey;
+    color: black;
+    margin: 2px;
+    text-align: left;
+    height: 25px;
+    width: 140px;
+}    
+
+#messages {
+    padding-right: 5px;
+    width: 150px;
+}

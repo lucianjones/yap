@@ -20,16 +20,18 @@ def get_channel(id):
     pass
 
 
-@channel_routes.route("/", methods=["POST"])
+@channel_routes.route("", methods=["POST"])
 @login_required
 def post_channel():
+    print(request.data)
     form = ChannelForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
+    print("###########", form.data, "##########")
     if form.validate_on_submit():
         channel = Channel(
             user_id=current_user.get_id(),
             server_id=form.data["server_id"],
-            channel_name=form.data["channel_id"],
+            channel_name=form.data["channel_name"],
             public=form.data["public"],
         )
         db.session.add(channel)

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { postMessage } from '../store/messages';
+import { postMessage } from '../../store/messages';
+import './MessageInput.css'
 
 function MessageInput({ serverId, channelId }) {
     const [body, setBody] = useState('');
@@ -22,18 +23,19 @@ function MessageInput({ serverId, channelId }) {
     }
 
     return (
-        <>
-            <form onSubmit={ submitMessage }>
+        <div>
+            <form id='msg-form' onSubmit={ submitMessage }>
                  <input 
+                     id='msg-input'
                      type='text'
                      placeholder='Send a message...'
                      name='body'
                      value={body}
                      onChange={ e => setBody(e.target.value) }
                  />
-                 <button type='submit'>Send</button>
+                 <button id='msg-btn' type='submit'>Send</button>
             </form>
-        </>
+        </div>
         )
 }
 
