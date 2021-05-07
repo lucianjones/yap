@@ -36,8 +36,7 @@ def post_message():
     db.session.add(message)
     db.session.commit()
 
-    results = Message.query.filter(
-        Message.channel_id == data["channel_id"]).all()
+    results = Message.query.filter(Message.channel_id == data["channel_id"]).all()
     messages = [result.to_dict() for result in results]
 
     return {"messages": messages}

@@ -14,8 +14,7 @@ def seed_recipients():
                 break
         user_id = rand
 
-        recipient = Recipient(
-            user_id=user_id, private_message_id=private_message_id)
+        recipient = Recipient(user_id=user_id, private_message_id=private_message_id)
         db.session.add(recipient)
         db.session.commit()
 

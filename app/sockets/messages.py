@@ -4,8 +4,6 @@ from flask_socketio import emit, join_room, leave_room
 from app.models import db, Message, Channel
 from app import socketio
 
-# channels = Channel.query.all()
-
 
 @socketio.on("join")
 def on_join(data):
