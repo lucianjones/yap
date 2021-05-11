@@ -44,11 +44,26 @@ def post_message():
 
 @message_routes.route("/<int:id>", methods=["PUT"])
 @login_required
-def update_message():
-    pass
+def update_message(id):
+    cur_usr = int(current_user.get_id())
+    dict_str = request.data.decode("UTF-8")
+    data = ast.literal_eval(dict_str)["update"]
+    message = Message.query.get(id)
+    if cur_usr == message.user_id:
+        message.body = data["body"]
+        db.session.add(message)
+        db.session.commit()
+        return {"message": message.to_dict()}
+    return {"status": 401}
 
 
 @message_routes.route("/<int:id>", methods=["DELETE"])
 @login_required
-def delete_message():
-    pass
+def delete_message(id):
+    cur_usr = int(current_user.get_id())
+    message = Message.query.get(id)
+    if cur_usr == message.user_id:
+        db.session.delete(message)
+        db.session.commit()
+        return {"status": 200}
+    return {"status": 401}

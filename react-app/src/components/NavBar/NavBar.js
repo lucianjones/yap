@@ -12,7 +12,7 @@ const NavBar = () => {
   return (
     <nav class="navbar">
       {sessionUser && (
-        <div class="navbar">
+        <div class="navbar logged-in">
           <NavLink to="/" exact={true} activeClassName="active">
             Home
           </NavLink>
@@ -21,7 +21,7 @@ const NavBar = () => {
         </div>
       )}
       {!sessionUser && (
-        <div class="navbar">
+        <div class="navbar logged-out">
           <NavLink to="/login" exact={true} activeClassName="active">
             Login
           </NavLink>

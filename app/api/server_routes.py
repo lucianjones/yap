@@ -1,7 +1,8 @@
+import ast
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import db, Server, User
-from app.forms import ServerForm, LoginForm
+from app.forms import ServerForm
 
 server_routes = Blueprint("servers", __name__)
 
@@ -54,17 +55,18 @@ def post_server():
 def update_server(id):
     user_id = current_user.get_id()
     server = Server.query.get(id)
+    dict_str = request.data.decode("UTF-8")
+    data = ast.literal_eval(dict_str)["update"]
     if user_id != server.user_id:
         return {403: "Access Denied"}
-    server_name = request.form["server_name"]
-    public = request.form["public"]
+    public = data["public"]
 
     if public == "true":
         public = True
     else:
         public = False
 
-    server.server_name = server_name
+    server.server_name = data["server_name"]
     server.public = public
 
     db.session.commit()

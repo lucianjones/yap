@@ -5,6 +5,7 @@ COPY react-app/. .
 
 # You have to set this because it should be set during build time.
 ENV REACT_APP_BASE_URL=https://yapapp.herokuapp.com/
+ENV SOCKET_URL=https://yapapp.herokuapp.com/
 
 # Build our React App
 RUN npm install
