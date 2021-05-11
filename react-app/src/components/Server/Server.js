@@ -9,11 +9,11 @@ function Server({ server, channel_id, server_id }) {
   const [channels, setChannels] = useState(false);
 
   useEffect(() => {
-    if (!channels) {
+    if (!channels && server.channels) {
       server.channels.forEach((channel) => {
         socket.emit("leave", { room: channel.id });
       });
-    } else {
+    } else if (channels && server.channels) {
       server.channels.forEach((channel) => {
         socket.emit("join", { room: channel.id });
       });

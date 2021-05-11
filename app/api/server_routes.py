@@ -55,6 +55,7 @@ def post_server():
 def update_server(id):
     user_id = current_user.get_id()
     server = Server.query.get(id)
+    print(request.data, "%$#$$@#$%_!#%$#%!@#%!@#$%")
     dict_str = request.data.decode("UTF-8")
     data = ast.literal_eval(dict_str)["update"]
     if user_id != server.user_id:

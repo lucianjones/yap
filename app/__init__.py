@@ -6,6 +6,7 @@ from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
 
 from flask_socketio import SocketIO, send, emit
+from engineio.payload import Payload
 
 
 from .seeds import seed_commands
@@ -31,6 +32,7 @@ def load_user(id):
     return User.query.get(int(id))
 
 
+Payload.max_decode_packets = 500
 socketio = SocketIO(app, cors_allowed_origins="*", logger=True)
 if __name__ == "__init__":
     socketio.run(app)

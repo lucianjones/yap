@@ -63,13 +63,13 @@ export const postServer = (serverName, isPublic) => async (dispatch) => {
   return server;
 };
 
-export const putServer = (server_name, isPublic, server_id) => async (dispatch) => {
-    const response = await fetch(`/api/servers/${server_id}`, {
+export const putServer = (update, serverId) => async (dispatch) => {
+    const response = await fetch(`/api/servers/${serverId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
         crossDomain: true,
-        body: JSON.stringify({ server_name: server_name, public: isPublic }),
+        body: JSON.stringify({ update: update }),
     });
     const server = await response.json();
     if (server.errors) return;

@@ -38,15 +38,14 @@ function Home() {
         e.preventDefault();
         const update = {
             server_name: serverName,
-            isPublic: isPublic,
-            server_id: editServer,
+            isPublic: `${isPublic}`,
         }
-        dispatch(putServer(update));
+        dispatch(putServer(update, editServer));
+		dispatch(getServers());
         setEditServer(-1);
         setServerName('');
         setIsPublic(true);
     }
-    console.log(editServer)
 
 	if (!loaded) {
 		return <h1>Loading...</h1>;
