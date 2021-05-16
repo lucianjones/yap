@@ -4,7 +4,25 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  height: 80px;
+  border-bottom: 1px white solid;
+}
+
+.user-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 60px;
 }
 
 .logged-in {
 } 
+
+.yap {
+    text-decoration: none;
+    font-size: 50px;
+    color: white;
+    margin-left: 5px;
+    margin-bottom: 15px;
+}

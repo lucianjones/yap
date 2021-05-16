@@ -13,17 +13,19 @@ const get_messages = (messages) => ({
   payload: messages,
 });
 
-const post_message = (messages) => ({
+const post_message = (message) => ({
   type: POST_MESSAGE,
-  payload: messages,
+  payload: message,
 });
 
-const put_message = () => ({
+const put_message = (message) => ({
     type: PUT_MESSAGE,
+    payload: message,
 });
 
-const delete_message = () => ({
+const delete_message = (message) => ({
     type: DELETE_MESSAGE,
+    payload: message,
 });
 
 export const getMessages = (channel_id) => async (dispatch) => {
@@ -46,18 +48,19 @@ export const postMessage = (message) => async (dispatch) => {
   });
 
   const result = await response.json();
-  dispatch(post_message(result.messages));
+  dispatch(post_message(result.message));
   socket.emit("message_update", { room: message.channel_id });
 };
 
 export const putMessage = (update) => async (dispatch) => {
-    await fetch(`/api/messages/${update.message_id}`, {
+    const response = await fetch(`/api/messages/${update.message_id}`, {
         method: "PUT",
         header: { "Content-Type": "application/json" },
         credentials: "include",
         body: JSON.stringify({ update: update }),
     })
-    dispatch(put_message());
+    const result = await response.json();
+    dispatch(put_message(result.message));
     socket.emit("message_update", { room: update.channel_id });
   }
 
@@ -67,21 +70,29 @@ export const deleteMessage = (message) => async (dispatch) => {
         header: { "Content-Type": "application/json" },
         credentials: "include",
     })
-    dispatch(delete_message());
+    dispatch(delete_message(message));
     socket.emit("message_update", { room: message.channel_id }); 
 }
 
-export default function messages(state, action) {
+export default function messages(state = [], action) {
   switch (action.type) {
     case GET_MESSAGES:
-      return { ...action.payload };
+      const allMessages = []
+      action.payload.forEach((message) => {
+        allMessages.push(message)
+      })
+      return allMessages ;
     case POST_MESSAGE:
-      return { ...action.payload };
+      state.unshift(action.payload)
+      return [ ...state ];
     case PUT_MESSAGE:
-          return { ...state };
+          const index = state.findIndex(message => message.id === action.payload.id) 
+          state[index] = action.payload
+          return [ ...state ];
     case DELETE_MESSAGE:
-          return { ...state }; 
+          state = state.filter(({ id }) => id !== action.payload.id)
+          return [ ...state ]; 
     default:
-      return { ...state };
+      return [ ...state ];
   }
 }

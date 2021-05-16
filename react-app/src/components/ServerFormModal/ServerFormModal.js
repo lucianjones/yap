@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { postServer } from "../../store/servers";
+import './ServerFormModal.css'
 
 function ServerForm() {
 	const dispatch = useDispatch();

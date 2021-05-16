@@ -1,11 +1,13 @@
 .server-button {
   border: none;
-  border-radius: none;
-  background-color: grey;
+  border-radius: 3px;
+  background-color: #2a2a3b53;
   color: white;
   margin: 2px;
   text-align: left;
   height: 30px;
+  color: white;
+  backdrop-filter: blur(10px);
 }
 
 #channels {

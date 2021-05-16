@@ -23,7 +23,7 @@ function Server({ server, channel_id, server_id }) {
   return (
     <div id="channels">
       <button
-        class="server-button"
+        className="server-button"
         onClick={() => (channels ? setChannels(false) : setChannels(true))}
       >
         {server.server_name}

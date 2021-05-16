@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { postChannel } from "../../store/channels";
+import { getServers } from "../../store/servers";
 
 function ChannelForm({ server_id }) {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ function ChannelForm({ server_id }) {
     if (data.errors) {
       setErrors(data.errors);
     }
+	dispatch(getServers());
   };
 
   return (

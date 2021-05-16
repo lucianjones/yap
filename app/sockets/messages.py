@@ -20,4 +20,4 @@ def on_leave(data):
 @socketio.on("message_update")
 def message_update(data):
     room = data["room"]
-    emit("dispatch_messages", broadcast=True, to=room)
+    emit("dispatch_messages", broadcast=True, to=room,  include_self=False)

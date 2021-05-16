@@ -2,7 +2,7 @@ import ast
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.forms import ChannelForm
-from app.models import db, Channel
+from app.models import db, Channel, User
 
 channel_routes = Blueprint("channels", __name__)
 
@@ -24,17 +24,19 @@ def get_channel(id):
 @channel_routes.route("", methods=["POST"])
 @login_required
 def post_channel():
-    print(request.data)
+    user_id = (current_user.get_id(),)
     form = ChannelForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
+        user = User.query.get(user_id)
         channel = Channel(
-            user_id=current_user.get_id(),
+            user_id=user_id,
             server_id=form.data["server_id"],
             channel_name=form.data["channel_name"],
             public=form.data["public"],
         )
         db.session.add(channel)
+        user.joined_channels.append(channel)
         db.session.commit()
         return channel.to_dict()
     return {"errors": validation_errors_to_error_messages(form.errors)}, 401

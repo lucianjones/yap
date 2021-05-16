@@ -10,18 +10,20 @@ const NavBar = () => {
   const sessionUser = useSelector((state) => state.session.user);
 
   return (
-    <nav class="navbar">
+    <nav className="navbar">
       {sessionUser && (
-        <div class="navbar logged-in">
-          <NavLink to="/" exact={true} activeClassName="active">
-            Home
+        <div className="navbar logged-in">
+          <NavLink to="/" exact={true} activeClassName="yap">
+            yap 
           </NavLink>
-          <User />
-          <LogoutButton />
+          <div className='user-div'>
+            <User />
+            <LogoutButton />
+          </div>
         </div>
       )}
       {!sessionUser && (
-        <div class="navbar logged-out">
+        <div className="navbar logged-out">
           <NavLink to="/login" exact={true} activeClassName="active">
             Login
           </NavLink>

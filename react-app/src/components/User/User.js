@@ -1,37 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React from 'react';
+import { useSelector } from 'react-redux';
+import './User.css';
 
 function User() {
-  const [user, setUser] = useState({});
-  const { userId } = useParams();
-
-  useEffect(() => {
-    if (!userId) {
-      return;
-    }
-    (async () => {
-      const response = await fetch(`/api/users/${userId}`);
-      const user = await response.json();
-      setUser(user);
-    })();
-  }, [userId]);
+  const user = useSelector((store) => store.session.user);
 
   if (!user) {
     return null;
   }
 
   return (
-    <ul>
-      <li>
-        <strong>User Id</strong> {userId}
-      </li>
-      <li>
-        <strong>Username</strong> {user.username}
-      </li>
-      <li>
-        <strong>Email</strong> {user.email}
-      </li>
-    </ul>
+    <div className='user-div'>
+        <div className='user' style={{'text-align': 'right'}}>{user.username}</div>
+        <div className='user' style={{'text-align': 'right'}}>{user.email}</div>
+    </div>
   );
 }
 export default User;

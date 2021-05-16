@@ -38,6 +38,7 @@ def post_server():
     form = ServerForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
+        user = User.query.get(user_id)
         server = Server(
             user_id=user_id,
             server_name=form.data["server_name"],
@@ -45,6 +46,7 @@ def post_server():
         )
 
         db.session.add(server)
+        user.joined_servers.append(server)
         db.session.commit()
         return server.to_dict()
     return {"errors": validation_errors_to_error_messages(form.errors)}, 401
@@ -79,8 +81,8 @@ def update_server(id):
 def delete_server(id):
     user_id = current_user.get_id()
     server = Server.query.get(id)
-    if user_id != server.user_id:
-        return {403: "Access Denied"}
+    res_serv = server.to_dict()
+    print("alsd;kfjas;lkdjf;laskdjf;lkasjdf;lkasjdlf")
     db.session.delete(server)
     db.session.commit()
-    return {204: "Delete Successful"}
+    return {"server": res_serv}

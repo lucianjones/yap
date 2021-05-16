@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Server from "../Server";
 import Messages from "../Messages";
-import { getServers, putServer } from "../../store/servers";
+import { getServers, putServer, deleteServer } from "../../store/servers";
 import ServerFormModal from "../ServerFormModal";
 import { getMessages } from "../../store/messages";
 import { socket } from "../../socket/socket";
@@ -26,12 +26,16 @@ function Home() {
 	}, [dispatch, loaded]);
 
 	useEffect(() => {
+        function sock() {
 		if (channelId !== -1) {
 			socket.on("dispatch_messages", () => {
 				dispatch(getMessages(channelId));
+                console.log(channelId)
 				socket.off("dipatch_messages", () => console.log("off"));
 			});
 		}
+        }
+        sock()
 	}, [channelId, dispatch]);
 
     function put_server(e) {
@@ -45,6 +49,10 @@ function Home() {
         setEditServer(-1);
         setServerName('');
         setIsPublic(true);
+    }
+
+    function delete_server(id) {
+        dispatch(deleteServer(id));
     }
 
 	if (!loaded) {
@@ -68,6 +76,11 @@ function Home() {
                                     Edit
                                 </button>
                                     )}
+                            {user.id === server.user_id && (
+                                <button onClick={() => delete_server(server.id)}>
+                                    Delete 
+                                </button>
+                            )}
                             {editServer === server.id && (
                                 <form onSubmit={put_server}>
                                     <input
