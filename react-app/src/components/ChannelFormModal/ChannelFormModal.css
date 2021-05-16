@@ -9,3 +9,39 @@
     margin-bottom: 3px;
     backdrop-filter: blur(10px);
 }
+
+#channel-form {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    left: 0;
+    bottom: 200px;
+    justify-content: space-between;
+    align-items: center;
+    width: 400px;
+    height: 200px;
+    background-color: #ffffff13;
+    padding: 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(6px);
+}
+
+#channel-submit {
+    border: none;
+    color: white;
+    background-color: #514db8;
+    border-radius: 3px;
+    position: relative;
+    height: 30px;
+    width: 80px;
+}
+
+#channel-submit:hover {
+    background-color: gray;
+}
+
+#channel-form-input {
+    border: 1px solid white;
+    background-color: #ffffff13;
+    height: 30px;
+}

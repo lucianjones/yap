@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { postServer } from "../../store/servers";
 import './ServerFormModal.css'
 
-function ServerForm() {
+function ServerForm({ setShowModal }) {
 	const dispatch = useDispatch();
 	const [errors, setErrors] = useState([]);
 	const [serverName, setServerName] = useState("");
@@ -15,26 +15,26 @@ function ServerForm() {
 		if (data.errors) {
 			setErrors(data.errors);
 		}
+        setShowModal(false)
 	};
 
 	return (
 		<>
-			<form onSubmit={submit}>
+			<form id='server-form' onSubmit={submit}>
 				<div>
 					{errors.map((error) => (
 						<div>{error}</div>
 					))}
 				</div>
-				<div>
 					<label htmlFor="serverName">Server Name</label>
 					<input
+                        id='server-form-input'
 						name="serverName"
 						type="text"
 						value={serverName}
 						onChange={(e) => setServerName(e.target.value)}
 					/>
-				</div>
-				<div>
+                <div>
 					<label htmlFor="public">Public</label>
 					<input
 						name="public"
@@ -42,8 +42,8 @@ function ServerForm() {
 						value={isPublic}
 						onChange={(e) => setIsPublic(e.target.value)}
 					/>
-				</div>
-				<button type="submit">Submit</button>
+                </div>
+				<button id='server-submit' type="submit">Submit</button>
 			</form>
 		</>
 	);

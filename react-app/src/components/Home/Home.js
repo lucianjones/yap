@@ -71,31 +71,42 @@ function Home() {
 								channel_id={{ channelId, setChannelId }}
 								server_id={{ serverId, setServerId }}
 							/>
-                            {user.id === server.user_id && editServer !== server.id && (
-                                <button onClick={() => setEditServer(server.id)}>
-                                    Edit
-                                </button>
-                                    )}
-                            {user.id === server.user_id && (
-                                <button onClick={() => delete_server(server.id)}>
-                                    Delete 
-                                </button>
-                            )}
+                            <div id='server-mod'>
+                                {user.id === server.user_id && editServer !== server.id && (
+                                    <button id='edit-button' onClick={() => setEditServer(server.id)}>
+                                        Edit
+                                    </button>
+                                )}
+                                {user.id === server.user_id && (
+                                    <button id='delete-button' onClick={() => delete_server(server.id)}>
+                                        Delete 
+                                    </button>
+                                )}
+                            </div>
                             {editServer === server.id && (
-                                <form onSubmit={put_server}>
+                                <form id='edit-server' onSubmit={put_server}>
+                                    <label>
+                                        Name
+                                    </label>
                                     <input
                                         type='text'
                                         name='server_name'
                                         value={serverName}
+                                        id='edit-server-input' 
                                         onChange={(e) => setServerName(e.target.value)}
                                     />
-                                    <input
-                                        type='checkbox'
-                                        name='public'
-                                        value={isPublic}
-                                        onChange={(e) => setIsPublic(e.target.value)}
-                                    />
-                                    <button type='submit'>
+                                    <div>
+                                        <label>
+                                            Public
+                                        </label>
+                                        <input
+                                            type='checkbox'
+                                            name='public'
+                                            value={isPublic}
+                                            onChange={(e) => setIsPublic(e.target.value)}
+                                        />
+                                    </div>
+                                    <button id='save-edit' type='submit'>
                                         Save
                                     </button>
                                 </form>

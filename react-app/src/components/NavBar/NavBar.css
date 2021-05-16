@@ -16,7 +16,9 @@
     height: 60px;
 }
 
-.logged-in {
+.logged-out {
+    display: flex;
+    justify-content: flex-end;
 } 
 
 .yap {

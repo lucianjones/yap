@@ -4,5 +4,23 @@ body {
   color: white; 
   background: rgb(0,0,0);
   background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(11,11,19,1) 100%);
+  font-family: 'Source Code Pro', monospace;
+}
+* {
+    font-family: 'Source Code Pro', monospace;
+    color: white;
 }
 
+#welcome {
+    position: relative;
+    font-size: 20px;
+}
+
+#chat {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: .02;
+    z-index: -1;
+}

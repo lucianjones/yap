@@ -18,13 +18,13 @@
   background-color: rgba(0, 0, 0, 0.4);
 }
 
-#modal-content {
+/*#modal-content {
   position: relative;
   top: 100px;
   border-radius: 10px;
-  /* display: flex;
-  justify-content: center; */
+  display: flex;
+  justify-content: center;
   background-size: 100%;
   padding: 100px;
   width: 800px;
-}
+} */

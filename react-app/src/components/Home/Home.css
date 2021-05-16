@@ -22,3 +22,55 @@
 #servers {
     margin-top: 10px;
 }
+
+#edit-button {
+    width: 65px;
+    padding: 2px;
+    border: none;
+    border-radius: 3px;
+    text-align: center;
+    margin: 2px 7px;
+    color: white;
+    background-color: #514db855;
+}
+
+#delete-button {
+    width: 65px;
+    padding: 2px;
+    border: none;
+    border-radius: 3px;
+    text-align: center;
+    margin: 2px 0;
+    color: white;
+    background-color: #ff000055;
+}
+
+#server-mod {
+    display: flex;
+}
+
+#edit-server {
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+#save-edit {
+    width: 65px;
+    padding: 2px;
+    border: none;
+    border-radius: 3px;
+    text-align: center;
+    margin: 5px 00px;
+    color: white;
+    background-color: #514db855;
+}
+
+#edit-server-input {
+    border: none;
+    background-color: #ffffff10;
+    backdrop-filter: blur(10px);
+    border: 1px solid white;
+    height: 25px;
+    color: white;
+}

@@ -1,31 +1,35 @@
-#create-server {
+#signup {
     border: none;
-    border-radius: 3px;
-    background-color: #1714635a;
     color: white;
-    font-size: 16px;
-    padding: 8px;
-    width: 95%;
-    backdrop-filter: blur(10px);
+    background-color: #514db8;
+    border-radius: 3px;
+    position: relative;
+    margin-left: 5px;
+    height: 30px;
+    width: 80px;
 }
 
-#server-form {
+#signup:hover {
+    background-color: gray;
+}
+
+#signup-form {
     display: flex;
     flex-direction: column;
     position: relative;
     left: 0;
-    bottom: 200px;
+    bottom: 100px;
     justify-content: space-between;
     align-items: center;
     width: 400px;
-    height: 200px;
+    height: 400px;
     background-color: #ffffff13;
     padding: 20px;
     border-radius: 10px;
     backdrop-filter: blur(6px);
 }
 
-#server-submit {
+#signup-submit {
     border: none;
     color: white;
     background-color: #514db8;
@@ -35,14 +39,13 @@
     width: 80px;
 }
 
-#server-submit:hover {
+#signup-submit:hover {
     background-color: gray;
 }
 
-#server-form-input {
+.signup-form-input {
+    padding: 5px;
     border: 1px solid white;
     background-color: #ffffff13;
     height: 30px;
 }
-
-

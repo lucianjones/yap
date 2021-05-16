@@ -21,7 +21,7 @@
   display: none;
 }
 
-.notyours {
+.not-yours {
   width: 55%;
   margin-bottom: 40px;
   border-radius: 5px;
@@ -42,16 +42,19 @@
   backdrop-filter: blur(10px);
 }
 
-.namedate {
+.name-date {
   display: flex;
   justify-content: space-between;
   align-content: center;
 }
 
-.editdelete {
+.edit-delete {
     border: none;
     border-radius: 3px;
-    background-color: #1714635a;
+    background-color: #514db854;
     color: white;
+    margin: 0 2px;
+    height: 25px;
+    width: 80px;
 }
 

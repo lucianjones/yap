@@ -4,6 +4,9 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff10;
+  backdrop-filter: blur(10px);
 }
 
 #msg-input {
@@ -11,8 +14,10 @@
   width: 100%;
   padding: 15px;
   height: 30px;
-  background-color: #ffffff10;
+  background-color: #ffffff00;
   color: white;
+  position: relative;
+
 }
 
 #msg-input:focus {
@@ -21,10 +26,13 @@
 
 #msg-btn {
     border: none;
-    border-radius: 3px;
+    border-radius: 5px;
     background-color: #1714635a;
     color: white;
     font-size: 16px;
     padding: 8px;
     backdrop-filter: blur(10px);
+    height: 40px;
+    width: 80px;
+    margin-right: 10px;
 }

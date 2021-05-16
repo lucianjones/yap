@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { postChannel } from "../../store/channels";
 import { getServers } from "../../store/servers";
 
-function ChannelForm({ server_id }) {
+function ChannelForm({ server_id, setShowModal }) {
   const dispatch = useDispatch();
   const [errors, setErrors] = useState([]);
   const [channelName, setChannelName] = useState("");
@@ -16,25 +16,25 @@ function ChannelForm({ server_id }) {
       setErrors(data.errors);
     }
 	dispatch(getServers());
+    setShowModal(false)
   };
 
   return (
     <>
-      <form onSubmit={submit}>
+      <form id='channel-form' onSubmit={submit}>
         <div>
           {errors.map((error) => (
             <div>{error}</div>
           ))}
         </div>
-        <div>
           <label htmlFor="channelName">Channel Name</label>
           <input
+            id='channel-form-input'
             name="channelName"
             type="text"
             value={channelName}
             onChange={(e) => setChannelName(e.target.value)}
           />
-        </div>
         <div>
           <label htmlFor="public">Public</label>
           <input
@@ -44,7 +44,7 @@ function ChannelForm({ server_id }) {
             onChange={(e) => setIsPublic(e.target.value)}
           />
         </div>
-        <button type="submit">Submit</button>
+        <button id='channel-submit' type="submit">Submit</button>
       </form>
     </>
   );
