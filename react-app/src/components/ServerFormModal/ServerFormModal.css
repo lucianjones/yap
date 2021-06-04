@@ -7,6 +7,7 @@
     padding: 8px;
     width: 95%;
     backdrop-filter: blur(10px);
+    cursor: pointer;
 }
 
 #server-form {
@@ -33,6 +34,7 @@
     position: relative;
     height: 30px;
     width: 80px;
+    cursor: pointer;
 }
 
 #server-submit:hover {

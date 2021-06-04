@@ -14,6 +14,9 @@ function Messages({ serverId, channelId }) {
 
 	function dateParser(str) {
 		const split = str.slice(0, -1).split("T");
+        split[0] = split[0].split('-').join('/')
+        split[1] = split[1].slice(0, 5)
+        console.log(`str: ${str} split: ${split}`)
 		return `${split[0]} ${split[1]}`;
 	};
 

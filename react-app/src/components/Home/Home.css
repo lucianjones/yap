@@ -3,6 +3,7 @@
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
+  height: 89vh;
 }
 
 #servers {
@@ -15,8 +16,9 @@
 #sidebar {
   border-right: 1px solid white;
   width: 180px;
-  height: 1000px;
+  height: 89vh;
   padding-top: 20px;
+  padding-right: 3px;
 }
 
 #servers {
@@ -32,6 +34,7 @@
     margin: 2px 7px;
     color: white;
     background-color: #514db855;
+    cursor: pointer;
 }
 
 #delete-button {
@@ -43,6 +46,7 @@
     margin: 2px 0;
     color: white;
     background-color: #ff000055;
+    cursor: pointer;
 }
 
 #server-mod {
@@ -64,6 +68,7 @@
     margin: 5px 00px;
     color: white;
     background-color: #514db855;
+    cursor: pointer;
 }
 
 #edit-server-input {

@@ -10,7 +10,7 @@ function User() {
   }
 
   return (
-    <div className='user-div'>
+    <div className='user-box'>
         <div className='user' style={{'text-align': 'right'}}>{user.username}</div>
         <div className='user' style={{'text-align': 'right'}}>{user.email}</div>
     </div>

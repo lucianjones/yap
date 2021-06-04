@@ -6,6 +6,7 @@
     position: relative;
     height: 30px;
     width: 80px;
+    cursor: pointer;
 }
 
 #login:hover {
@@ -36,6 +37,7 @@
     position: relative;
     height: 30px;
     width: 80px;
+    cursor: pointer;
 }
 
 #login-submit:hover {
