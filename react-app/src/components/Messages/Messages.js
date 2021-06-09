@@ -56,7 +56,7 @@ function Messages({ serverId, channelId }) {
 								</div>
 								<p> {message.body} </p>
                                 {message.user_id === user.id && (
-                                    <button className='edit-delete' onClick={() =>delBtn(message)}>Delete</button>
+                                    <button id='dt-btn' className='edit-delete' onClick={() =>delBtn(message)}>Delete</button>
                                 )}
                                 {(message.user_id === user.id && edit !== message.id) && (
                                     <button  className='edit-delete' onClick={() =>setEdit([message.id, message.channel_id])}>Edit</button>
@@ -64,13 +64,14 @@ function Messages({ serverId, channelId }) {
                                 {edit[0] === message.id && (
                                     <form onSubmit={editMessage}>
                                          <input
+                                            id='msg-edit-input'
                                             type="text"
                                             placeholder="Edit your message..."
                                             name="body"
                                             value={body}
                                             onChange={(e) => setBody(e.target.value)}
                                         />
-                                        <button type="submit">
+                                        <button id='msg-edit-save' type="submit">
                                              Save
                                         </button>
                                      </form>

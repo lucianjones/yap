@@ -38,14 +38,14 @@ function Home() {
         sock()
 	}, [channelId, dispatch]);
 
-    function put_server(e) {
+    async function put_server(e) {
         e.preventDefault();
         const update = {
             server_name: serverName,
             isPublic: `${isPublic}`,
         }
-        dispatch(putServer(update, editServer));
-		dispatch(getServers());
+        await dispatch(putServer(update, editServer));
+		await dispatch(getServers());
         setEditServer(-1);
         setServerName('');
         setIsPublic(true);

@@ -55,14 +55,11 @@ def post_server():
 @server_routes.route("/<int:id>", methods=["PUT"])
 @login_required
 def update_server(id):
-    user_id = current_user.get_id()
     server = Server.query.get(id)
-    print(request.data, "%$#$$@#$%_!#%$#%!@#%!@#$%")
     dict_str = request.data.decode("UTF-8")
     data = ast.literal_eval(dict_str)["update"]
-    if user_id != server.user_id:
-        return {403: "Access Denied"}
-    public = data["public"]
+    print(data, "%$#$$@#$%_!#%$#%!@#%!@#$%")
+    public = data["isPublic"]
 
     if public == "true":
         public = True
@@ -79,7 +76,6 @@ def update_server(id):
 @server_routes.route("/<int:id>", methods=["DELETE"])
 @login_required
 def delete_server(id):
-    user_id = current_user.get_id()
     server = Server.query.get(id)
     res_serv = server.to_dict()
     print("alsd;kfjas;lkdjf;laskdjf;lkasjdf;lkasjdlf")

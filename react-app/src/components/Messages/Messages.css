@@ -58,3 +58,24 @@
     width: 80px;
 }
 
+#dt-btn {
+    background-color: #ff000050;
+}
+
+#msg-edit-input {
+    border: 1px solid white;
+    background-color: #ffffff13;
+    backdrop-filter: blur(10px);
+    padding: 5px;
+    margin: 10px 3px 0;
+    width: 80%;
+}
+
+#msg-edit-save {
+    border: none;
+    border-radius: 3px;
+    background-color: #514db854;
+    height: 31px;
+    margin-left: 5px;
+    width: 80px;
+}
