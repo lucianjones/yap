@@ -7,6 +7,7 @@
   align-items: center;
   background-color: #ffffff10;
   backdrop-filter: blur(10px);
+  margin-left: 3px;
 }
 
 #msg-input {
@@ -35,4 +36,5 @@
     height: 40px;
     width: 80px;
     margin-right: 10px;
+    cursor: pointer;
 }

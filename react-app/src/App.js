@@ -6,7 +6,6 @@ import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import User from "./components/User";
 import Home from "./components/Home";
-import Chat from './chat2.jpg';
 
 import { authenticate } from "./store/session";
 
@@ -33,14 +32,12 @@ function App() {
               <div id='welcome'>
                   <p>Welcome to yap! A premier chat application.</p>
               </div>
-              <img src={Chat} alt='chat' id='chat' />
           </BrowserRouter>
       )
   }
 
   return (
     <BrowserRouter>
-      <img src={Chat} alt='chat' id='chat' />
       <NavBar />
         <ProtectedRoute>
           <Home />

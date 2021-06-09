@@ -8,6 +8,8 @@ const PUT_SERVER = "server/PUT_SERVER";
 
 const DELETE_SERVER = 'server/DELETE_SERVER';
 
+const GET_SERVER_QUERY = 'server/GET_SERVER_QUERY';
+
 const get_servers = (servers) => ({
   type: GET_SERVERS,
   payload: servers,
@@ -32,6 +34,11 @@ const delete_server = (server) => ({
     type: DELETE_SERVER,
     payload: server,
 })
+
+const get_server_query = (servers) => ({
+    type: GET_SERVER_QUERY,
+    payload: servers,
+});
 
 export const getServers = () => async (dispatch) => {
   const response = await fetch("/api/servers", {
@@ -95,6 +102,17 @@ export const deleteServer = (id) => async (dispatch) => {
     if (server.errors) return;
     dispatch(delete_server());
 }
+
+export const getServerQuery = (query) => async (dispatch) => {
+    const response = await fetch(`/api/servers?query=${query}`, {
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        crossDomain: true,
+    });
+    const servers = await response.json();
+    if (servers.errors) return;
+    dispatch(get_server_query(servers));
+}
         
 
 export default function servers(state = {}, action) {
@@ -110,6 +128,8 @@ export default function servers(state = {}, action) {
     case DELETE_SERVER:
           delete state.server
           return { ...state } 
+    case GET_SERVER_QUERY:
+          return { ...state, query: action.payload };
     default:
       return state;
   }
