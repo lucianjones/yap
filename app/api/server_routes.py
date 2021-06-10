@@ -3,6 +3,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import db, Server, User
 from app.forms import ServerForm
+from fuzzywuzzy import process
 
 server_routes = Blueprint("servers", __name__)
 
@@ -78,7 +79,28 @@ def update_server(id):
 def delete_server(id):
     server = Server.query.get(id)
     res_serv = server.to_dict()
-    print("alsd;kfjas;lkdjf;laskdjf;lkasjdf;lkasjdlf")
     db.session.delete(server)
     db.session.commit()
     return {"server": res_serv}
+
+
+@server_routes.route("/search")
+@login_required
+def query_servers():
+    query = request.args["query"]
+    choices = Server.query.all()
+    results = process.extract(query, choices, limit=10)
+    filtered_results = [x for (x, y) in results]
+    return {"results": [result.to_dict() for result in filtered_results]}
+
+
+@server_routes.route("/join/<int:id>")
+@login_required
+def join_server(id):
+    server = Server.query.get(id)
+    user_id = current_user.get_id()
+    user = User.query.get(user_id)
+    db.session.add(server)
+    user.joined_servers.append(server)
+    db.session.commit()
+    return server.to_dict()

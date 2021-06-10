@@ -6,6 +6,7 @@ import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import LogoutButton from "../auth/LogoutButton";
 import User from "../User";
+import Search from '../Search';
 import { login } from "../../store/session";
 import "./NavBar.css";
 
@@ -28,6 +29,7 @@ const NavBar = () => {
           <NavLink to="/" exact={true} className="yap">
             yap 
           </NavLink>
+          <Search />
           <div className='user-div'>
             <User />
             <LogoutButton />

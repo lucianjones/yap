@@ -30,7 +30,7 @@
     padding: 2px;
     border: none;
     border-radius: 3px;
-    text-align: center;
+    textAlign: center;
     margin: 2px 7px;
     color: white;
     background-color: #514db855;
@@ -42,7 +42,7 @@
     padding: 2px;
     border: none;
     border-radius: 3px;
-    text-align: center;
+    textAlign: center;
     margin: 2px 0;
     color: white;
     background-color: #ff000055;
@@ -64,7 +64,7 @@
     padding: 2px;
     border: none;
     border-radius: 3px;
-    text-align: center;
+    textAlign: center;
     margin: 5px 00px;
     color: white;
     background-color: #514db855;

@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "c87151f54f7728ac61a638ab68ca605ec217be39e31dff00f8f33bd679408344"
+            "sha256": "ebb430d1395cc7724f84b7bd20c23730754f019ea6b1ce72ce3b3500b5744144"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -134,6 +134,17 @@
             ],
             "index": "pypi",
             "version": "==0.14.3"
+        },
+        "fuzzywuzzy": {
+            "extras": [
+                "speedup"
+            ],
+            "hashes": [
+                "sha256:45016e92264780e58972dca1b3d939ac864b78437422beecebb3095f8efd00e8",
+                "sha256:928244b28db720d1e0ee7587acf660ea49d7e4c632569cad4f1cd7e68a5f0993"
+            ],
+            "index": "pypi",
+            "version": "==0.18.0"
         },
         "greenlet": {
             "hashes": [
@@ -330,6 +341,12 @@
             ],
             "index": "pypi",
             "version": "==4.1.0"
+        },
+        "python-levenshtein": {
+            "hashes": [
+                "sha256:dc2395fbd148a1ab31090dd113c366695934b9e85fe5a4b2a032745efd0346f6"
+            ],
+            "version": "==0.12.2"
         },
         "python-socketio": {
             "hashes": [

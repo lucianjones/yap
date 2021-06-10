@@ -4,11 +4,13 @@ const GET_SERVER = "servers/GET_SERVER";
 
 const POST_SERVER = "servers/POST_SERVER";
 
-const PUT_SERVER = "server/PUT_SERVER";
+const PUT_SERVER = "servers/PUT_SERVER";
 
-const DELETE_SERVER = 'server/DELETE_SERVER';
+const DELETE_SERVER = 'servers/DELETE_SERVER';
 
-const GET_SERVER_QUERY = 'server/GET_SERVER_QUERY';
+const GET_SERVER_QUERY = 'servers/GET_SERVER_QUERY';
+
+const JOIN_SERVER = 'servers/JOIN_SERVER';
 
 const get_servers = (servers) => ({
   type: GET_SERVERS,
@@ -38,6 +40,11 @@ const delete_server = (server) => ({
 const get_server_query = (servers) => ({
     type: GET_SERVER_QUERY,
     payload: servers,
+});
+
+const join_server = (server) => ({
+    type: JOIN_SERVER,
+    payload: server,
 });
 
 export const getServers = () => async (dispatch) => {
@@ -104,7 +111,7 @@ export const deleteServer = (id) => async (dispatch) => {
 }
 
 export const getServerQuery = (query) => async (dispatch) => {
-    const response = await fetch(`/api/servers?query=${query}`, {
+    const response = await fetch(`/api/servers/search?query=${query}`, {
         headers: { "Content-Type": "application/json" },
         credentials: "include",
         crossDomain: true,
@@ -112,6 +119,18 @@ export const getServerQuery = (query) => async (dispatch) => {
     const servers = await response.json();
     if (servers.errors) return;
     dispatch(get_server_query(servers));
+    return servers.results
+}
+
+export const joinServer = (id) => async (dispatch) => {
+    const response = await fetch(`/api/servers/join/${id}`, {
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        crossDomain: true,
+    });
+    const server = await response.json();
+    if (server.errors) return;
+    dispatch(join_server(server));
 }
         
 
@@ -129,7 +148,10 @@ export default function servers(state = {}, action) {
           delete state.server
           return { ...state } 
     case GET_SERVER_QUERY:
-          return { ...state, query: action.payload };
+          return { ...state };
+    case JOIN_SERVER:
+          const serv = action.payload
+          return { ...state, serv  }
     default:
       return state;
   }
